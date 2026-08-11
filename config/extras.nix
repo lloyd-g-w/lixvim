@@ -3,7 +3,6 @@
     lz-n.enable = true;
     avante = {
       enable = true;
-      lazyLoad.settings.event = "VeryLazy";
       settings = {
         provider = "copilot";
         instructions_file = "avante.md";
