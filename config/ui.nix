@@ -13,14 +13,8 @@
         component_separators = "";
       };
     };
-    notify = {
-      enable = true;
-      settings = {
-        stages = "fade_in_slide_out";
-        timeout = 3000;
-        background_colour = "#1e222a";
-        icons = {error = ""; warn = ""; info = ""; debug = ""; trace = "✎";};
-      };
+    noice = {
+    enable = true;
     };
   };
 }
