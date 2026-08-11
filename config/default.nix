@@ -1,10 +1,16 @@
-{
+{lib, ...}: {
   # Import all your configuration modules here
   imports = [
     ./colorschemes.nix
+    ./completion.nix
+    ./debugging.nix
+    ./editing.nix
+    ./extras.nix
     ./lsp.nix
     ./file-browsing.nix
+    ./languages.nix
     ./mini.nix
+    ./ui.nix
     ./which-key.nix
   ];
 
@@ -12,6 +18,12 @@
     mapleader = " ";
     maplocalleader = " ";
   };
+
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "copilot.vim"
+      "presence.nvim"
+    ];
 
   opts = {
     encoding = "utf8";

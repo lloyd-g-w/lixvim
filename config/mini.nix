@@ -6,8 +6,13 @@
         icons = {};
         ai = {};
         comment = {};
+        cursorword = {};
+        extra = {};
+        hipatterns = {};
+        move = {};
         pairs = {};
         surround = {};
+        trailspace = {};
       };
     };
   };
