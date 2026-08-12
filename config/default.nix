@@ -38,7 +38,6 @@
 
     termguicolors = true;
 
-    undodir = "$HOME/.vim/undodir";
     undofile = true;
 
     cursorline = true;
