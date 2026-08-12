@@ -1,10 +1,12 @@
 {
-plugins.lspconfig.enable = true;
   plugins.lsp = {
     enable = true;
 
     servers = {
-      hls = {enable = true; installGhc = false;};
+      hls = {
+        enable = true;
+        installGhc = false;
+      };
       clangd = {
         enable = true;
         cmd = [
@@ -19,12 +21,21 @@ plugins.lspconfig.enable = true;
         enable = true;
         settings.nixd.options.nixvim.expr = "(builtins.getFlake (toString ./.)).legacyPackages.\${builtins.currentSystem}.nixvimOptions";
       };
-      rust_analyzer = {enable = true; installCargo = false; installRustc = false;};
+      rust_analyzer = {
+        enable = true;
+        installCargo = false;
+        installRustc = false;
+      };
       ocamllsp.enable = true;
       svelte.enable = true;
       tinymist = {
         enable = true;
-        settings = {formatterMode = "typstyle"; formatterPrintWidth = 80; formatterIndentSize = 2; formatterProseWrap = true;};
+        settings = {
+          formatterMode = "typstyle";
+          formatterPrintWidth = 80;
+          formatterIndentSize = 2;
+          formatterProseWrap = true;
+        };
       };
       csharp_ls.enable = true;
       ts_ls.enable = true;
@@ -47,8 +58,23 @@ plugins.lspconfig.enable = true;
   };
 
   keymaps = [
-    {mode = "n"; key = "gd"; action.__raw = "vim.lsp.buf.definition"; options.desc = "LSP definition";}
-    {mode = "n"; key = "K"; action.__raw = "vim.lsp.buf.hover"; options.desc = "LSP hover";}
-    {mode = ["n" "v"]; key = "<leader>ca"; action.__raw = "vim.lsp.buf.code_action"; options.desc = "LSP code action";}
+    {
+      mode = "n";
+      key = "gd";
+      action.__raw = "vim.lsp.buf.definition";
+      options.desc = "LSP definition";
+    }
+    {
+      mode = "n";
+      key = "K";
+      action.__raw = "vim.lsp.buf.hover";
+      options.desc = "LSP hover";
+    }
+    {
+      mode = ["n" "v"];
+      key = "<leader>ca";
+      action.__raw = "vim.lsp.buf.code_action";
+      options.desc = "LSP code action";
+    }
   ];
 }
