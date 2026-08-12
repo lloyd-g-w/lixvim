@@ -63,6 +63,32 @@
         # vscode-extensions.ms-vscode.cpptools
         gdb
       ];
+
+    lixvimModule = {
+      config,
+      lib,
+      pkgs,
+      ...
+    }: {
+      imports = [
+        nixvim.homeModules.nixvim
+      ];
+
+      options.programs.lixvim.enable =
+        lib.mkEnableOption "Lixvim";
+
+      config = lib.mkIf config.programs.lixvim.enable {
+        programs.nixvim = {
+          enable = true;
+
+          imports = [
+            ./config
+          ];
+
+          extraPackages = lixvim-deps pkgs;
+        };
+      };
+    };
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = [
@@ -70,6 +96,11 @@
         "aarch64-linux"
         "aarch64-darwin"
       ];
+
+      flake.homeManagerModules = {
+        lixvim = lixvimModule;
+        default = lixvimModule;
+      };
 
       perSystem = {
         system,
@@ -85,12 +116,14 @@
               extraPackages = lixvim-deps pkgs;
             }
           ];
-
-          extraSpecialArgs = {};
         };
       in {
         checks.default = configuration.config.build.test;
-        packages.default = configuration.config.build.package;
+
+        packages = {
+          lixvim = configuration.config.build.package;
+          default = configuration.config.build.package;
+        };
 
         legacyPackages.nixvimOptions = configuration.options;
       };

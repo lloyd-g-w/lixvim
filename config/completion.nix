@@ -15,7 +15,10 @@
         };
         snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
         sources = [
-          {name = "lazydev"; group_index = 0;}
+          {
+            name = "lazydev";
+            group_index = 0;
+          }
           {name = "nvim_lsp";}
           {name = "luasnip";}
           {name = "buffer";}

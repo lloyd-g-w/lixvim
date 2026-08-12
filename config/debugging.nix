@@ -7,16 +7,20 @@
           name = "Launch file";
           type = "cppdbg";
           request = "launch";
-          program.__raw = ''function()
-            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-          end'';
+          program.__raw = ''
+            function()
+              return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+            end
+          '';
           cwd = "\${workspaceFolder}";
           stopAtEntry = false;
-          setupCommands = [{
-            text = "-enable-pretty-printing";
-            description = "enable pretty printing";
-            ignoreFailures = false;
-          }];
+          setupCommands = [
+            {
+              text = "-enable-pretty-printing";
+              description = "enable pretty printing";
+              ignoreFailures = false;
+            }
+          ];
           miMode = "gdb";
           miDebuggerPath = "gdb";
         }
