@@ -74,8 +74,6 @@
         nixvim.homeModules.nixvim
       ];
 
-      home.packages = lixvim-deps pkgs;
-
       options.programs.lixvim.enable =
         lib.mkEnableOption "Lixvim";
 
@@ -86,7 +84,12 @@
           imports = [
             ./config
           ];
+
+          extraPackages = lixvim-deps pkgs;
         };
+
+        # Makes them available in your normal shell
+        home.packages = lixvim-deps pkgs;
       };
     };
   in
