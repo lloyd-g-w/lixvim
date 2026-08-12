@@ -1,4 +1,8 @@
-{config, pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   extraPlugins = [pkgs.vimPlugins.grapple-nvim];
 
   plugins = {
@@ -26,7 +30,14 @@
     treesitter = {
       enable = true;
       grammarPackages = with config.plugins.treesitter.package.parsers; [
-        c lua vim vimdoc query svelte typescript javascript
+        c
+        lua
+        vim
+        vimdoc
+        query
+        svelte
+        typescript
+        javascript
       ];
       highlight.enable = true;
       indent.enable = true;
@@ -36,7 +47,10 @@
       enable = true;
       settings.filetypes = {
         "*" = {};
-        css = {rgb_fn = true; oklch_fn = true;};
+        css = {
+          rgb_fn = true;
+          oklch_fn = true;
+        };
       };
     };
     guess-indent.enable = true;
@@ -44,7 +58,11 @@
       enable = true;
       settings = {
         indent.char = "│";
-        scope = {enabled = true; show_start = false; show_end = false;};
+        scope = {
+          enabled = true;
+          show_start = false;
+          show_end = false;
+        };
       };
     };
     todo-comments.enable = true;
@@ -59,15 +77,60 @@
   };
 
   keymaps = [
-    {mode = ["n" "x" "o"]; key = "s"; action.__raw = "function() require('flash').jump() end"; options.desc = "Flash";}
-    {mode = ["n" "x" "o"]; key = "S"; action.__raw = "function() require('flash').treesitter() end"; options.desc = "Flash Treesitter";}
-    {mode = "n"; key = "<leader>g"; action = "<cmd>LazyGit<CR>"; options.desc = "LazyGit";}
-    {mode = "n"; key = "<leader>m"; action.__raw = "function() require('grapple').toggle() end"; options.desc = "Grapple current file";}
-    {mode = "n"; key = "<leader>M"; action.__raw = "function() require('grapple').toggle_tags() end"; options.desc = "Grapple tags";}
-    {mode = "n"; key = "<C-h>"; action = "<cmd>TmuxNavigateLeft<CR>"; options.silent = true;}
-    {mode = "n"; key = "<C-j>"; action = "<cmd>TmuxNavigateDown<CR>"; options.silent = true;}
-    {mode = "n"; key = "<C-k>"; action = "<cmd>TmuxNavigateUp<CR>"; options.silent = true;}
-    {mode = "n"; key = "<C-l>"; action = "<cmd>TmuxNavigateRight<CR>"; options.silent = true;}
+    {
+      mode = ["n" "x" "o"];
+      key = "s";
+      action.__raw = "function() require('flash').jump() end";
+      options.desc = "Flash";
+    }
+    {
+      mode = ["n" "x" "o"];
+      key = "S";
+      action.__raw = "function() require('flash').treesitter() end";
+      options.desc = "Flash Treesitter";
+    }
+    {
+      mode = "n";
+      key = "<leader>g";
+      action = "<cmd>LazyGit<CR>";
+      options.desc = "LazyGit";
+    }
+    {
+      mode = "n";
+      key = "<leader>m";
+      action.__raw = "function() require('grapple').toggle() end";
+      options.desc = "Grapple current file";
+    }
+    {
+      mode = "n";
+      key = "<leader>M";
+      action.__raw = "function() require('grapple').toggle_tags() end";
+      options.desc = "Grapple tags";
+    }
+    {
+      mode = "n";
+      key = "<C-h>";
+      action = "<cmd>TmuxNavigateLeft<CR>";
+      options.silent = true;
+    }
+    {
+      mode = "n";
+      key = "<C-j>";
+      action = "<cmd>TmuxNavigateDown<CR>";
+      options.silent = true;
+    }
+    {
+      mode = "n";
+      key = "<C-k>";
+      action = "<cmd>TmuxNavigateUp<CR>";
+      options.silent = true;
+    }
+    {
+      mode = "n";
+      key = "<C-l>";
+      action = "<cmd>TmuxNavigateRight<CR>";
+      options.silent = true;
+    }
   ];
 
   extraConfigLua = ''

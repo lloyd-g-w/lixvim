@@ -22,10 +22,15 @@
     presence.enable = true;
   };
 
-  keymaps = [{
-    mode = "i";
-    key = "<C-f>";
-    action = ''copilot#Accept("\\<CR>")'';
-    options = {expr = true; replace_keycodes = false;};
-  }];
+  keymaps = [
+    {
+      mode = "i";
+      key = "<C-f>";
+      action = ''copilot#Accept("\\<CR>")'';
+      options = {
+        expr = true;
+        replace_keycodes = false;
+      };
+    }
+  ];
 }
