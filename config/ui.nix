@@ -15,6 +15,14 @@
     };
     noice = {
     enable = true;
+    settings = {
+        presets = {
+      bottom_search = false;
+      command_palette = true;
+      long_message_to_split = false;
+      inc_rename = false;
+      };
+    };
     };
   };
 }
