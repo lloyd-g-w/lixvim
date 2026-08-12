@@ -12,8 +12,9 @@
     flake-parts,
     ...
   } @ inputs: let
-  lixvim-deps = pkgs: with pkgs;[
-# For image.nvim plugin
+    lixvim-deps = pkgs:
+      with pkgs; [
+        # For image.nvim plugin
         luajitPackages.magick
         imagemagick
         luarocks
@@ -59,12 +60,10 @@
         stylua
         astyle
 
-        vscode-extensions.ms-vscode.cpptools
+        # vscode-extensions.ms-vscode.cpptools
         gdb
-  ];
-
+      ];
   in
-
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = [
         "x86_64-linux"
@@ -72,14 +71,19 @@
         "aarch64-darwin"
       ];
 
-      perSystem = {system,pkgs, ...}: let
+      perSystem = {
+        system,
+        pkgs,
+        ...
+      }: let
         configuration = nixvim.lib.evalNixvim {
           inherit system;
 
-          modules = [./config
-          {extraPackages = lixvim-deps pkgs;
-          }
-
+          modules = [
+            ./config
+            {
+              extraPackages = lixvim-deps pkgs;
+            }
           ];
 
           extraSpecialArgs = {};
