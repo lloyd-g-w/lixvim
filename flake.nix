@@ -1,5 +1,5 @@
 {
-  description = "A Nixvim configuration";
+  description = "Lixvim";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -7,31 +7,56 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = {
+  outputs = inputs@{
     nixvim,
     flake-parts,
     ...
-  } @ inputs:
-    flake-parts.lib.mkFlake {inherit inputs;} {
+  }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "x86_64-linux"
         "aarch64-linux"
         "aarch64-darwin"
       ];
 
-      perSystem = {system, ...}: let
+      flake.homeManagerModules.lixvim = {
+        config,
+        lib,
+        ...
+      }: {
+        imports = [
+          nixvim.homeModules.nixvim
+        ];
+
+        options.programs.lixvim.enable =
+          lib.mkEnableOption "Lixvim";
+
+        config = lib.mkIf config.programs.lixvim.enable {
+          programs.nixvim = {
+            enable = true;
+
+            imports = [
+              ./config
+            ];
+          };
+        };
+      };
+
+      perSystem = { system, ... }: let
         configuration = nixvim.lib.evalNixvim {
           inherit system;
 
-          modules = [./config];
-
-          extraSpecialArgs = {};
+          modules = [
+            ./config
+          ];
         };
       in {
-        checks.default = configuration.config.build.test;
-        packages.default = configuration.config.build.package;
+        packages = {
+          lixvim = configuration.config.build.package;
+          default = configuration.config.build.package;
+        };
 
-        legacyPackages.nixvimOptions = configuration.options;
+        checks.default = configuration.config.build.test;
       };
     };
 }
