@@ -19,7 +19,7 @@
         "aarch64-darwin"
       ];
 
-      flake.homeManagerModules.lixvim = {
+      flake.homeManagerModules.default = {
         config,
         lib,
         ...
