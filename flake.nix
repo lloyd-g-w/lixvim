@@ -84,8 +84,7 @@
           imports = [
             ./config
           ];
-
-          extraPackages = lixvim-deps pkgs;
+          # extraPackages = lixvim-deps pkgs; # Could add pkgs directly to the neovim runtime environment but probs bad
         };
 
         # Makes them available in your normal shell
